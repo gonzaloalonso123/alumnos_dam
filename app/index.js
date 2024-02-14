@@ -26,9 +26,7 @@ app.get("/test", (req, res) => {
   res.send("Hello World!");
 });
 
-
 app.use("/alumnos", Alumnos);
-
 app.use("/asignaturas", Asignaturas);
 
 app.listen(6999, () => {
