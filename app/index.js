@@ -3,7 +3,8 @@ const app = express();
 const cors = require("cors");
 const db = require("./database/config/db.js");
 const custom = require("./custom");
-const Alumnos = require("./routes/alumnos");,const Asignaturas = require("./routes/asignaturas");
+const Alumnos = require("./routes/alumnos");
+const Asignaturas = require("./routes/asignaturas");
 
 
 app.use(express.json());
@@ -26,7 +27,8 @@ app.get("/test", (req, res) => {
 });
 
 
-app.use("/alumnos", Alumnos);,
+app.use("/alumnos", Alumnos);
+
 app.use("/asignaturas", Asignaturas);
 
 app.listen(6999, () => {
