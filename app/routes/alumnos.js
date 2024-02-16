@@ -55,7 +55,7 @@ router.delete("/:id", async (req, res) => {
 
 router.get("/byname/:value", async (req, res) => {  
   try {
-    const item = await Alumnos.getByName(req.params);
+    const item = await Alumnos.getByName(req.params.value);
     res.status(200).json(item);
   }
   catch (error) {
