@@ -22,7 +22,7 @@ const del = async (id) => {
 };
 
 const getByName = async (data) => {
-    return await Alumnos.findOne({ undefined: data }).exec();
+    return await Alumnos.findOne({ name: data }).exec();
 };
 
 module.exports = {
