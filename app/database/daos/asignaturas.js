@@ -21,9 +21,6 @@ const del = async (id) => {
   return await Asignaturas.findByIdAndDelete(id);
 };
 
-const getByCustom = async (custom, params) => {
-  return await Asignaturas.find(custom);
-};
 
 
 module.exports = {

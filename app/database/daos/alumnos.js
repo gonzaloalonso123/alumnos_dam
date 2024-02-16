@@ -21,10 +21,9 @@ const del = async (id) => {
   return await Alumnos.findByIdAndDelete(id);
 };
 
-const getByCustom = async (custom, params) => {
-  return await Alumnos.find(custom);
+const getByName = async (data) => {
+    return await Alumnos.findOne({ undefined: data }).exec();
 };
-
 
 module.exports = {
   getAll,

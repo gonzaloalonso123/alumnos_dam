@@ -53,4 +53,14 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+router.get("/byname/:value", async (req, res) => {  
+  try {
+    const item = await Alumnos.getByName(req.params);
+    res.status(200).json(item);
+  }
+  catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;
