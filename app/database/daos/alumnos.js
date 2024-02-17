@@ -29,5 +29,5 @@ module.exports = {
   create,
   update,
   del,
-  getByCustom,
+  
 };
