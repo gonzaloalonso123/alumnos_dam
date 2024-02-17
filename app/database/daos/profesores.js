@@ -21,7 +21,9 @@ const del = async (id) => {
   return await Profesores.findByIdAndDelete(id);
 };
 
-
+const getByNombre = async (data) => {
+    return await Profesores.findOne({ nombre: data }).exec();
+};
 
 module.exports = {
   getAll,
@@ -29,5 +31,5 @@ module.exports = {
   create,
   update,
   del,
-  
+  getByNombre
 };
