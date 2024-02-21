@@ -23,16 +23,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {  
-  try {
-    const item = await Alumnos.create(req.body);
-    res.status(200).json(item);
-  }
-  catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
 router.delete("/:id", async (req, res) => {  
   try {
     const item = await Alumnos.del(req.params.id);
