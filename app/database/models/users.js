@@ -9,7 +9,7 @@ const createUserIfNotExists = async (uid, email) => {
         db.collection("users")
           .doc(uid)
           .set({
-            {"indentation":"2","language":"javascript","database":"firebase","port":"6999","framework":"express","wipe":true}
+            {"indentation":"2","language":"javascript","database":"firebase","port":"6999","framework":"express","wipe":false}
           });
       }
     })
