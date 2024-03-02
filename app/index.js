@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const db = require("./database/config/db.js");
+const functions = require("firebase-functions");
+const authMiddleware = require("./middleware/authMiddleware");
 const custom = require("./custom");
 const Asignaturas = require("./routes/asignaturas");
 const Alumnos = require("./routes/alumnos");
@@ -31,6 +33,4 @@ app.use("/asignaturas", Asignaturas);
 app.use("/alumnos", Alumnos);
 app.use("/profesores", Profesores);
 
-app.listen(6999, () => {
-  console.log("Server is running on port 6999");
-});
+exports.app = functions.https.onRequest(app);

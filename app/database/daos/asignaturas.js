@@ -1,35 +1,39 @@
-const Asignaturas = require("../models/asignaturas");
+const { db } = require("../index");
+const { collection } = require("firebase-admin/firestore");
+const AsignaturasRef = collection(db, "Asignaturas");
 
-  
-const getAll = async () => {
-  return await Asignaturas.find();
+const getAsignaturasById = async (id) => {
+  const docRef = db.collection(Asignaturas).doc(id);
+  const doc = await docRef.get();
+  if (!doc.exists) {
+    return null;
+  }
+  const data = doc.data();
+  return data;
 };
 
-const getById = async (id) => {
-  return await Asignaturas.findById(id);
+const createAsignaturas = async (data) => {
+  const docRef = db.collection(Asignaturas).doc();
+  await docRef.set(data);
+  const newAsignaturas = await docRef.get();
+  return newAsignaturas.data();
 };
 
-const create = async (data) => {
-  return await Asignaturas.create(data);
+const updateAsignaturas = async (id, data) => {
+  const docRef = db.collection(Asignaturas).doc(id);
+  await docRef.update(data);
+  const updatedAsignaturas = await docRef.get();
+  return updatedAsignaturas.data();
 };
 
-const update = async (id, data) => {
-  return await Asignaturas.findByIdAndUpdate(id, data, {new: true});
+const deleteAsignaturas = async (id) => {
+  const docRef = db.collection(Asignaturas).doc(id);
+  await docRef.delete();
 };
 
-const del = async (id) => {
-  return await Asignaturas.findByIdAndDelete(id);
-};
-
-const getByNombre = async (data) => {
-    return await Asignaturas.findOne({ nombre: data }).exec();
-};
-  
 module.exports = {
-  getAll,
-  getById,
-  create,
-  update,
-  del,
-  getByNombre
+  getAsignaturasById,
+  createAsignaturas,
+  updateAsignaturas,
+  deleteAsignaturas,
 };

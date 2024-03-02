@@ -1,33 +1,39 @@
-const Alumnos = require("../models/alumnos");
+const { db } = require("../index");
+const { collection } = require("firebase-admin/firestore");
+const AlumnosRef = collection(db, "Alumnos");
 
-  
-const getAll = async () => {
-  return await Alumnos.find();
+const getAlumnosById = async (id) => {
+  const docRef = db.collection(Alumnos).doc(id);
+  const doc = await docRef.get();
+  if (!doc.exists) {
+    return null;
+  }
+  const data = doc.data();
+  return data;
 };
 
-const getById = async (id) => {
-  return await Alumnos.findById(id);
+const createAlumnos = async (data) => {
+  const docRef = db.collection(Alumnos).doc();
+  await docRef.set(data);
+  const newAlumnos = await docRef.get();
+  return newAlumnos.data();
 };
 
-const create = async (data) => {
-  return await Alumnos.create(data);
+const updateAlumnos = async (id, data) => {
+  const docRef = db.collection(Alumnos).doc(id);
+  await docRef.update(data);
+  const updatedAlumnos = await docRef.get();
+  return updatedAlumnos.data();
 };
 
-const update = async (id, data) => {
-  return await Alumnos.findByIdAndUpdate(id, data, {new: true});
+const deleteAlumnos = async (id) => {
+  const docRef = db.collection(Alumnos).doc(id);
+  await docRef.delete();
 };
 
-const del = async (id) => {
-  return await Alumnos.findByIdAndDelete(id);
-};
-
-
-  
 module.exports = {
-  getAll,
-  getById,
-  create,
-  update,
-  del,
-  
+  getAlumnosById,
+  createAlumnos,
+  updateAlumnos,
+  deleteAlumnos,
 };
